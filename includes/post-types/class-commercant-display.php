@@ -139,9 +139,9 @@ class commercant_Display extends commercant {
 			$return .= $commercant_item['description_generale'];
 			$return .= "</div>";
 		}
-	
+
 		// Horaires
-		
+
 		$return .= "<h3>" . __('Horaires','commercant') . " : </h3>";
 		if(!empty($commercant_item['horaires_infos'])) {	
 			$return .= $commercant_item['horaires_infos'];
