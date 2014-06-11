@@ -61,6 +61,7 @@ class commercant_Display extends commercant {
 			'email'								=>	get_post_meta( $post->ID, '_commercant_email', true ),
 			'url'									=>	get_post_meta( $post->ID, '_commercant_url', true ),
 			'facebook'						=>	get_post_meta( $post->ID, '_commercant_facebook', true ),
+			'description_generale'		=>	wpautop(get_post_meta( $post->ID, '_commercant_description_generale', true )),
 			'localisation'						=>	get_post_meta( $post->ID, '_commercant_localisation', true ),
 			'horaires_infos'				=>	wpautop(get_post_meta( $post->ID, '_commercant_horaires_infos', true )),
 			'h_lun_ma'						=>	get_post_meta( $post->ID, '_commercant_lundi_matin', true ),
@@ -131,6 +132,14 @@ class commercant_Display extends commercant {
 		$return .= "<h3>" . __('Localisation','commercant') . " : </h3>";
 		$return .= "<div class='commercant-item-map' id='commercant-item-map" . get_the_ID() . "' data-commercant='" . json_encode($commercant_item) . "' ></div>";
 		
+		// Description generale
+		if(!empty($commercant_item['description_generale'])) {
+			$return .= "<h3>" . __('Description generale','commercant') . " : </h3>";
+			$return .= "<div class='commercant-item-description-generale'>";
+			$return .= $commercant_item['description_generale'];
+			$return .= "</div>";
+		}
+	
 		// Horaires
 		
 		$return .= "<h3>" . __('Horaires','commercant') . " : </h3>";

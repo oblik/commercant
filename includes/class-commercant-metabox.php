@@ -111,6 +111,18 @@ class commercant_Metabox {
 					'type' => 'text_url',
 				),
 				array(
+					'name' => 'Description du commer&ccedil;ant',
+					'id'   => $prefix . 'descriptiontitle',
+					'type' => 'title',
+				),
+				array(
+					'name' => 'Description',
+					'desc' => 'Description g&eacute;n&eacute;rale du commer&ccedil;ant.',
+					'default' => '',
+					'id' => $prefix . 'description_generale',
+					'type' => 'wysiwyg'
+				),
+				array(
 					'name' => 'Situation du commer&ccedil;ant',
 					'id'   => $prefix . 'titresection2',
 					'type' => 'title',
