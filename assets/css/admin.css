@@ -84,6 +84,14 @@ content: "\f306";
     vertical-align: text-bottom;
 } 
 
+.cmb_id__commercant_descriptiontitle .cmb_metabox_title:before {
+content: "\f337";
+ display: inline-block;
+    font: 20px/1 'dashicons';
+    margin: 1px 10px 0 0;
+    vertical-align: text-bottom;
+} 
+
 .wrap-title {
   float: left;
   position: relative;

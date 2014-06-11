@@ -32,7 +32,7 @@ class commercant_Display extends commercant {
 	public function return_commercant_variables() {
 
 		global $post;
-		
+			
 		// recuperation de la premiere image et retaille
 		$commercant_photos = get_post_meta( $post->ID, '_commercant_photos', false );
 		
@@ -40,7 +40,7 @@ class commercant_Display extends commercant {
 		
 			foreach($commercant_photos[0] as $commercant_photo) {
 				$photo_resize = vt_resize( '', $commercant_photo, 620, 340, false );
-				$commercant_photos_resize[] = $photo_resize[url];
+				$commercant_photos_resize[] = $photo_resize['url'];
 			}
 			
 			foreach($commercant_photos[0] as $commercant_photo) {
@@ -80,7 +80,7 @@ class commercant_Display extends commercant {
 			'h_dim_am'						=>	get_post_meta( $post->ID, '_commercant_dimanche_amidi', true ),
 			'accepte_paiement'			=>	get_post_meta( $post->ID, '_commercant_accepte_paiement', false ),
 			'photos'							=>	$commercant_photos_resize,
-			'thumb'							=>  $commercant_thumb[url],
+			'thumb'							=>  $commercant_thumb['url'],
 		);
 		
 	}
@@ -253,8 +253,17 @@ class commercant_Display extends commercant {
             } else {
                 $template_path = plugin_dir_path( __FILE__ ) . '/templates/single-commercant.php';
             }
-        }
+        }        
     }
+	if ( is_post_type_archive('commercant' ) ) {
+            // checks if the file exists in the theme first,
+            // otherwise serve the file from the plugin
+            if ( $theme_file = locate_template( array ( 'archives-commercant.php' ) ) ) {
+                $template_path = $theme_file;
+            } else {
+                $template_path = plugin_dir_path( __FILE__ ) . '/templates/archives-commercant.php';
+            }
+        }
     return $template_path;
 	}
 	

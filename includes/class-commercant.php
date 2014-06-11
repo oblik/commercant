@@ -155,7 +155,7 @@ class commercant {
 		
 		// Recuperation variables PHP ver javascript
 		// http://www.limecanvas.com/passing-variables-between-php-and-jquery/
-		$var_for_js['pluginUrl'] = plugins_url( $this->_token, $plugin );
+		$var_for_js['pluginUrl'] = plugins_url( $this->_token);
 		wp_localize_script( $this->_token . '-frontend', 'commercant_info', $var_for_js );
 		
 	} // End enqueue_scripts()

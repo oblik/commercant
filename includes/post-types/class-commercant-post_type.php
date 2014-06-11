@@ -47,7 +47,7 @@ class commercant_Post_Type extends commercant {
 			'singular_name' => _x( 'commer&ccedil;ant', 'post type singular name' , 'commercant' ),
 			'add_new' => _x( 'Ajouter nouveau commer&ccedil;ant', $this->_token , 'commercant' ),
 			'add_new_item' => sprintf( __( 'Ajouter nouveau commer&ccedil;ant' , 'commercant' ), __( 'Post' , 'commercant' ) ),
-			'edit_item' => sprintf( __( 'Editer commer&ccedil;ants' , 'commercant' ), __( 'Post' , 'commercant' ) ),
+			'edit_item' => sprintf( __( 'Editer commer&ccedil;ant' , 'commercant' ), __( 'Post' , 'commercant' ) ),
 			'new_item' => sprintf( __( 'Nouveau commer&ccedil;ants' , 'commercant' ), __( 'Post' , 'commercant' ) ),
 			'all_items' => sprintf( __( 'Tous les commer&ccedil;ants' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
 			'view_item' => sprintf( __( 'Voir le commer&ccedil;ants' , 'commercant' ), __( 'Post' , 'commercant' ) ),
@@ -55,7 +55,7 @@ class commercant_Post_Type extends commercant {
 			'not_found' =>  sprintf( __( 'Pas de commer&ccedil;ant' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
 			'not_found_in_trash' => sprintf( __( 'Pas de commer&ccedil;ant ' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
 			'parent_item_colon' => '',
-			'menu_name' => __( 'Commer&ccedil;ant' , 'commercant' )
+			'menu_name' => __( 'Commer&ccedil;ants' , 'commercant' )
 		);
 
 		$args = array(
@@ -67,7 +67,7 @@ class commercant_Post_Type extends commercant {
 			'show_in_menu' => true,
 			'show_in_nav_menus' => true,
 			'query_var' => false,
-			'rewrite' => true,
+			'rewrite' => array('slug' => 'commercant'),			
 			'capability_type' => 'post',
 			'has_archive' => true,
 			'hierarchical' => true,
@@ -75,8 +75,10 @@ class commercant_Post_Type extends commercant {
 			'menu_position' => 5,
 			'menu_icon' => ''
 		);
-
+		
+		
 		register_post_type( $this->_token, $args );
+			
 	}
 
 	/**
@@ -106,7 +108,7 @@ class commercant_Post_Type extends commercant {
             'labels' => $labels
         );
 
-        register_taxonomy( 'post_type_terms' , $this->_token , $args );
+        register_taxonomy( 'categorie' , $this->_token , $args );
     }
 
     /**
