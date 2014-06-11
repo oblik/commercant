@@ -50,7 +50,7 @@ class commercant_Post_Type extends commercant {
 			'edit_item' => sprintf( __( 'Editer commer&ccedil;ant' , 'commercant' ), __( 'Post' , 'commercant' ) ),
 			'new_item' => sprintf( __( 'Nouveau commer&ccedil;ants' , 'commercant' ), __( 'Post' , 'commercant' ) ),
 			'all_items' => sprintf( __( 'Tous les commer&ccedil;ants' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
-			'view_item' => sprintf( __( 'Voir le commer&ccedil;ants' , 'commercant' ), __( 'Post' , 'commercant' ) ),
+			'view_item' => sprintf( __( 'Voir la fiche' , 'commercant' ), __( 'Post' , 'commercant' ) ),
 			'search_items' => sprintf( __( 'Rechercher commer&ccedil;ants' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
 			'not_found' =>  sprintf( __( 'Pas de commer&ccedil;ant' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
 			'not_found_in_trash' => sprintf( __( 'Pas de commer&ccedil;ant ' , 'commercant' ), __( 'Posts' , 'commercant' ) ),
@@ -108,7 +108,7 @@ class commercant_Post_Type extends commercant {
             'labels' => $labels
         );
 
-        register_taxonomy( 'categorie' , $this->_token , $args );
+        register_taxonomy( 'cat_commercant' , $this->_token , $args );
     }
 
     /**

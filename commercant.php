@@ -55,7 +55,7 @@ function commercant_load_php_class() {
 	}
 }
 
-$inst = new commercant_Post_Type();
-$inst = new commercant_Metabox();
-$inst = new commercant_Display();
+$commercantobject = new commercant_Post_Type();
+$commercantobject = new commercant_Metabox();
+$commercantobject = new commercant_Display();
 ?>

@@ -13,7 +13,8 @@ get_header(); ?>
 				<div class="post-entry">
 					<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>		
 					<section class="entry-content clearfix" itemprop="articleBody">
-								<?php // echo $inst->getCommercantInfos(); ?>
+								<?php echo $commercantobject->getCommercantInfos('photos'); ?>
+								<?php echo $commercantobject->getCommercantInfos('Identite',0); ?>
 					</section> <!-- end article section -->
 				</div>
 				<!-- end of .post-entry -->
