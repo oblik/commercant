@@ -1,0 +1,175 @@
+.cmb_metabox_title {
+  background: none repeat scroll 0 0 #222222;
+  color: #FFFFFF;
+  display: block;
+  font-size: 14px;
+  margin: 0 -12px !important;
+  padding: 10px 20px !important;
+  text-transform: uppercase;
+}
+
+.form-table td p.cmb_metabox_description {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-top: 4px;
+
+}
+
+.form-table td .cmb_metabox_description {
+  color:#666666;
+}
+
+.form-table .cmb-type-title td {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.form-table .slider-range-max {
+margin:0 0 10px 0;
+}
+
+.ui-widget-content a {
+  outline: 0 none;
+}
+
+.ui-slider-range {
+  /* background: none repeat scroll 0 0 #3498db !important; */
+}
+
+
+/* TITRES ____________________________________________________ */
+
+.cmb_metabox_title:before {
+color:#999999;
+}
+
+.cmb_id__commercant_titresection .cmb_metabox_title:before {
+content: "\f110";
+ display: inline-block;
+    font: 20px/1 'dashicons';
+    margin: 1px 10px 0 0;
+    vertical-align: text-bottom;
+} 
+
+.cmb_id__commercant_titresection2 .cmb_metabox_title:before {
+content: "\f230";
+ display: inline-block;
+    font: 20px/1 'dashicons';
+    margin: 1px 10px 0 0;
+    vertical-align: text-bottom;
+} 
+
+.cmb_id__commercant_titresection3 .cmb_metabox_title:before {
+content: "\f321";
+ display: inline-block;
+    font: 20px/1 'dashicons';
+    margin: 1px 10px 0 0;
+    vertical-align: text-bottom;
+} 
+
+.cmb_id__commercant_titresection4 .cmb_metabox_title:before {
+content: "\f155";
+ display: inline-block;
+    font: 20px/1 'dashicons';
+    margin: 1px 10px 0 0;
+    vertical-align: text-bottom;
+} 
+
+.cmb_id__commercant_titresection5 .cmb_metabox_title:before {
+content: "\f306";
+ display: inline-block;
+    font: 20px/1 'dashicons';
+    margin: 1px 10px 0 0;
+    vertical-align: text-bottom;
+} 
+
+.wrap-title {
+  float: left;
+  position: relative;
+  width: 100%;
+}
+
+.cmb-type-title span.toggle-section:before {
+  background: none repeat scroll 0 0 #222222;
+content: "\f347";
+  display: block;
+  float: right;
+  font-family: 'dashicons';
+  font-size: 14px;
+  font-size-adjust: none;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  margin: 0;
+  position: absolute;
+  right: 25px;
+  text-align: center;
+  top: 18px;
+  vertical-align: baseline;
+  width: 5%;
+  color:#fff;
+  -webkit-transition: all 400ms ease;
+-moz-transition: all 400ms ease;
+-ms-transition: all 400ms ease;
+-o-transition: all 400ms ease;
+transition: all 400ms ease;
+}
+
+.cmb_metabox_title {
+  -webkit-transition: all 400ms ease;
+-moz-transition: all 400ms ease;
+-ms-transition: all 400ms ease;
+-o-transition: all 400ms ease;
+transition: all 400ms ease;
+}
+
+.cmb_metabox_title:hover {
+cursor:pointer;
+background:#0074A2;
+}
+
+.activetab .cmb_metabox_title {
+background:#0074A2;
+}
+
+tr.cmb-type-pw_map td{
+}
+
+.cmb_id__commercant_localisation th {
+  width: 21% !important;
+}
+.cmb-type-pw_map td {
+width:600px;
+}
+
+a.toggle-section {
+  position: relative;
+  text-decoration: none;
+}
+
+a.toggle-section.activetab span.toggle-section {
+}
+
+a.toggle-section:hover span.toggle-section:before,
+a.toggle-section.activetab span.toggle-section:before {
+background:#0074A2;
+}
+
+a.toggle-section.activetab span.toggle-section:before {
+transform: rotate(180deg);
+transform-origin:0% 50%;
+}
+
+.cmb-type-pw_map .map {
+	height: 400px;
+	width: 97%;
+	margin-top: 0.6em;
+	border: solid 1px #DFDFDF;
+}
+
+table.cmb_metabox .cmb_media_status .img_status {
+  display: inline-block;
+  width: 80px;
+}
