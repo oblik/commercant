@@ -23,7 +23,6 @@ require_once( 'includes/class-commercant.php' );
 require_once( 'includes/class-commercant-settings.php' );
 
 //constant
- 
 if ( ! defined( 'commercant_site_URL' ) )
     define( 'commercant_site_URL', get_site_url());
 
@@ -44,8 +43,12 @@ function commercant () {
 $commercantobject = commercant();
 
 require_once( 'includes/post-types/class-commercant-post_type.php' );
+if ( ! class_exists( 'Tax_Meta_Class') ) {
+	require_once( plugin_dir_path( __FILE__ ) . 'includes/lib/Tax-meta-class/Tax-meta-class.php' );	
+}	
 require_once( 'includes/class-commercant-metabox.php' );
 require_once( 'includes/post-types/class-commercant-display.php' );
+
 
 // vt_resize - Resize images dynamically using wp built in functions
 add_action( 'init', 'commercant_load_php_class' );
@@ -58,4 +61,5 @@ function commercant_load_php_class() {
 $commercantobject = new commercant_Post_Type();
 $commercantobject = new commercant_Metabox();
 $commercantobject = new commercant_Display();
+
 ?>

@@ -6,15 +6,15 @@ class commercant_Metabox {
 
 	public function __construct () {
 	
-		if ( is_admin() ) {
-		
+		if ( is_admin() ) {		
 			// initialize_cmb_meta_boxes			
-			add_action( 'init', array( $this, 'commercant_initialize_cmb_meta_boxes' ), 9999 );			
+			add_action( 'init', array( $this, 'commercant_initialize_cmb_meta_boxes' ), 9999 );
+			add_action( 'init', array( $this, 'commercant_initialize_tax_metaboxes' ), 9999 );
+			
 			// Include and setup custom metaboxes and fields			
-			add_filter( 'cmb_meta_boxes', array( $this, 'commercant_metaboxes' ) );
-		
+			add_filter( 'cmb_meta_boxes', array( $this, 'commercant_metaboxes' ) );			
 		}
-
+		
 	}
 	
 
@@ -24,7 +24,7 @@ class commercant_Metabox {
 
 		if ( !class_exists( 'cmb_Meta_Box' ) ) {
 			 require_once( plugin_dir_path( __FILE__ ) . '/lib/metabox/init.php' );	
-		} 
+		}
 		
 		if ( !function_exists( 'pw_map_field' ) ) {
 			require_once( plugin_dir_path( __FILE__ ) . '/lib/metabox/cmb_field_map/cmb-field-map.php' );
@@ -33,10 +33,38 @@ class commercant_Metabox {
 		if ( !function_exists( 'cmb_field_slide' ) ) {
 			require_once( plugin_dir_path( __FILE__ ) . 'lib/metabox/cmb_field_slide/cmb_field_slide.php' );
 		}
-
+		
 	}
 
-
+	/**
+	 * Define the metabox and field configurations.
+	 *
+	 * @param  array $meta_boxes
+	 * @return array
+	 */
+	
+	public function commercant_initialize_tax_metaboxes() {
+	
+		$config = array(
+		   'id' => 'commercant_tax_metabox',                         // meta box id, unique per meta box
+		   'title' => 'Commercant Meta Box',                      // meta box title
+		   'pages' => array('cat_commercant'),                    // taxonomy name, accept categories, post_tag and custom taxonomies
+		   'context' => 'normal',                           // where the meta box appear: normal (default), advanced, side; optional
+		   'fields' => array(),                             // list of meta fields (can be added by field arrays)
+		   'local_images' => false,                         // Use local or hosted images (meta box images for add/remove)
+		   'use_with_theme' => false                        //change path if used with theme set to true, false for a plugin or anything else for a custom path(default false).
+		);
+	 
+		$commercantMetaObject = new Tax_Meta_Class($config);		 
+		//select field
+		$commercantMetaObject->addSelect('select_field_id',array('selectkey1'=>'Select Value1','selectkey2'=>'Select Value2'),array('name'=> 'My select ', 'std'=> array('selectkey2')));
+		//Color field
+		$commercantMetaObject->addColor('commercant_tax_color',array('name'=> 'Couleur '));
+		$commercantMetaObject->Finish();
+	
+	}
+	
+	
 	/**
 	 * Define the metabox and field configurations.
 	 *
@@ -308,6 +336,30 @@ class commercant_Metabox {
 
 		return $meta_boxes;
 	}
+	
+	public function commercant_tax_metabox() {
+	
+		$config = array(
+		   'id' => 'commercant_tax_metabox',                         // meta box id, unique per meta box
+		   'title' => 'Commercant Meta Box',                      // meta box title
+		   'pages' => array('cat_commercant'),                    // taxonomy name, accept categories, post_tag and custom taxonomies
+		   'context' => 'normal',                           // where the meta box appear: normal (default), advanced, side; optional
+		   'fields' => array(),                             // list of meta fields (can be added by field arrays)
+		   'local_images' => false,                         // Use local or hosted images (meta box images for add/remove)
+		   'use_with_theme' => false                        //change path if used with theme set to true, false for a plugin or anything else for a custom path(default false).
+		);
+		 
+		$commercantMetaObject = new Tax_Meta_Class($config);		 
+		//select field
+		$commercantMetaObject->addSelect('select_field_id',array('selectkey1'=>'Select Value1','selectkey2'=>'Select Value2'),array('name'=> 'My select ', 'std'=> array('selectkey2')));
+		//Color field
+		$commercantMetaObject->addColor('commercant_tax_color',array('name'=> 'Couleur '));
+		$commercantMetaObject->Finish();
 
+
+		$commercantobject = new commercant_Post_Type();
+		$commercantobject = new commercant_Metabox();
+		$commercantobject = new commercant_Display();
+	}
 }
 ?>
