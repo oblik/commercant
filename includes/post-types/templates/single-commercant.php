@@ -15,7 +15,7 @@ get_header(); ?>
 					<section class="entry-content clearfix" itemprop="articleBody">
 						<div class="post-entry">
 						
-						<a class="blue button" href=""><?php _e('Retour','commercant'); ?></a>
+						<a class="blue button" href="<?php echo get_post_type_archive_link( 'commercant' ); ?>"><?php _e('Retour','commercant'); ?></a>
 									
 						<?php echo $commercantobject->getCommercantInfos('photos',$titre=true); ?>
 						<?php echo $commercantobject->getCommercantInfos('Identite',$titre=true); ?>
@@ -23,8 +23,9 @@ get_header(); ?>
 						<?php echo $commercantobject->getCommercantInfos('description',$titre=true); ?>
 						<?php echo $commercantobject->getCommercantInfos('horaires',$titre=true); ?>
 						<?php echo $commercantobject->getCommercantInfos('plus',$titre=true); ?>
-						<?php echo $commercantobject->getCommercantInfos('terms',$titre=true); ?>	
-						
+						<?php echo $commercantobject->getCommercantInfos('terms',$titre=true); ?>
+						<?php echo $commercantobject->getCommercantInfos('tags',$titre=true); ?>
+
 						</div>
 						
 					</section> <!-- end article section -->

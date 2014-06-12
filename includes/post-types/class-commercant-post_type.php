@@ -72,13 +72,14 @@ class commercant_Post_Type extends commercant {
 			'has_archive' => true,
 			// 'hierarchical' => true,
 			'supports' => array( 'title'),
+			'taxonomies' => array('post_tag'),
 			'menu_position' => 5,
 			'menu_icon' => ''
 		);
 		
 		
 		register_post_type( $this->_token, $args );
-			flush_rewrite_rules();	
+		// flush_rewrite_rules();
 	}
 
 	/**
@@ -103,7 +104,7 @@ class commercant_Post_Type extends commercant {
 
         $args = array(
             'public' => true,
-           // 'hierarchical' => true,
+            'hierarchical' => true,
             'rewrite' => array('slug' => 'categorie-commercant'),	
             'labels' => $labels
         );

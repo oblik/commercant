@@ -84,6 +84,7 @@ class commercant_Display extends commercant {
 			'h_dim_am'						=>	get_post_meta( $post->ID, '_commercant_dimanche_amidi', true ),
 			'accepte_paiement'			=>	get_post_meta( $post->ID, '_commercant_accepte_paiement', false ),
 			'terms'								=>   wp_get_post_terms( $post->ID, 'cat_commercant'),
+			'tags'								=>	get_the_tags($post->ID),
 			'photos'							=>	$commercant_photos_resize,
 			'thumb'							=>  $commercant_thumb['url']
 		);
@@ -264,13 +265,27 @@ class commercant_Display extends commercant {
 					$term_link = get_term_link($term->term_id,'cat_commercant');
 					// If there was an error, continue to the next term.
 					if ( is_wp_error( $term_link ) ) {continue;}
-					$return .= '<li><a href="' . $term_link . '">' . $term->name . '</li>';
+					$return .= '<li><a href="' . $term_link . '">' . $term->name . '</a></li>';
 				}
 				$return .= "</ul>";
-			return($return);
+				return($return);
+			}
 		}
+		
+		// Tags
+		if ($part=='tags') {
+			$return = '';
+			if (!empty($commercant_item['tags'])) {
+				if ($title != false) {$return .= '<h3>' . __('Tags','commercant') . ' : </h3>';}				
+				$return .= '<ul>';				
+				foreach ($commercant_item['tags'] as $tag) {
+					$return .= '<li><a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a></li>';
+				}
+				$return .= "</ul>";				
+				return($return);
+			}
 
-	}
+		}
 }
 
 

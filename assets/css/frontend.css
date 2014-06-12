@@ -3,12 +3,29 @@ height:350px;
 width:100%;
 }
 
+/* fix bug max-with google maps */
+
 .commercant-item-map img{
 max-width: none;
 }
 
 .commercant-item-map label {
 width: auto; display: inline;
+}
+
+.info_gmaps {
+  overflow: hidden;
+  padding: 10px 5px;
+  width: 300px;
+}
+
+.info_gmaps_photo {
+float:left;
+margin:0 20px 20px 0;
+}
+
+.info_gmaps p {
+margin:0;
 }
 
 /* diaporama */
