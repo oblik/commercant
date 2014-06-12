@@ -114,11 +114,11 @@ class commercant_Settings {
 				array(
 					'id' 			=> 'commercant_optionfiche_template',
 					'label'			=> __( 'Affichage d\'une fiche commercant', 'commercant' ),
-					'description'	=> __( 'Choisissez la fa&ccedil;on dont la fiche commercant doit s\'afficher.', 'commercant' ),
+					'description'	=> __( 'Choisissez la fa&ccedil;on dont la fiche commercant doit s\'afficher. La liste des commer&ccedil;ants par cat&eacute;gorie est affich&eacute;e avec le template "archive-commercant.php" situ&eacute;e dans votre theme, sinon dans le repertoire "includes/post-types/templates/" du plugin.', 'commercant' ),
 					'type'			=> 'radio',
-					'options'		=> array( 'check1' => 'Utiliser le template "single-commercant.php" situ&eacute; dans votre theme, sinon dans "includes/post-types/templates/", <strong>&agrave; modifier suivant votre th&egrave;me</strong>.', 'check2' => 'Utiliser le template "single.php" du theme actif, <strong>remplace la partie the_content();</strong>'),
+					'options'		=> array( 'check1' => 'Utiliser le template "single-commercant.php" situ&eacute; dans votre theme, sinon dans le repertoire "includes/post-types/templates/" du plugin, <strong>&agrave; modifier suivant votre th&egrave;me</strong>.', 'check2' => 'Utiliser le template "single.php" du theme actif, <strong>remplace la partie the_content();</strong>'),
 					'default'		=> 'check2'
-				)				
+				)
 			)
 		);
 

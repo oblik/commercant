@@ -3,20 +3,24 @@
 class commercant_Display extends commercant {
 
 	public function __construct () {
+	
 		define('BASE_URL', get_bloginfo('url'));
 		
 		add_filter( 'commercant_variables', 'return_commercant_variables' );
+		
+		/*	Custom template pour archives commercant */
+		
+		add_filter('template_include', array($this, 'commercant_archive_custom_template'),1);	
 		
 		/*	Choix du mode d'affichage pour la fiche commercant */
 	
 		$commercant_optionfiche_template = get_option( 'wpt_commercant_optionfiche_template' );
 
 		if ("check1" == $commercant_optionfiche_template) {			
-			add_filter('template_include', array($this, 'commercant_custom_template'),1);			
+			add_filter('template_include', array($this, 'commercant_single_custom_template'),1);			
 		} else {	
 			add_filter('the_content', array( $this, 'insertCommercantInfos' ));
 		}
-		
 	
 	}
 		
@@ -306,11 +310,20 @@ class commercant_Display extends commercant {
 	**/
 
 	public function insertCommercantInfos($content) {
-
+		
 		if( is_main_query() && in_the_loop() && is_single()) {
 			global $post;
+			global $commercantobject;
 			 if ($post->post_type == 'commercant') {
-				$new_content = $this->getCommercantInfos();
+				$new_content = 
+				$commercantobject->getCommercantInfos('photos') 
+				.$commercantobject->getCommercantInfos('Identite',$titre=true)
+				.$commercantobject->getCommercantInfos('localisation',$titre=true)
+				.$commercantobject->getCommercantInfos('description',$titre=true)
+				.$commercantobject->getCommercantInfos('horaires',$titre=true)
+				.$commercantobject->getCommercantInfos('plus',$titre=true)
+				.$commercantobject->getCommercantInfos('terms',$titre=true)
+				.$commercantobject->getCommercantInfos('tags',$titre=true);
 				$content = $new_content . $content;
 			}
 			return $content;
@@ -318,7 +331,7 @@ class commercant_Display extends commercant {
 	}
 
 	/**
-	 * commercant_custom_template()
+	 * commercant_single_custom_template()
 	 *
 	 * Custom template for single commercant
 	 *
@@ -327,31 +340,49 @@ class commercant_Display extends commercant {
 	 * @return $content 
 	**/
 	
-	public function commercant_custom_template($template_path) {
-	if ( get_post_type() == 'commercant' ) {
-        if ( is_single() ) {
-            // checks if the file exists in the theme first,
-            // otherwise serve the file from the plugin
-            if ( $theme_file = locate_template( array ( 'single-commercant.php' ) ) ) {
-                $template_path = $theme_file;
-            } else {
-                $template_path = plugin_dir_path( __FILE__ ) . '/templates/single-commercant.php';
-            }
-        }        
-    }
-	if ( is_post_type_archive('commercant' ) ) {
-            // checks if the file exists in the theme first,
-            // otherwise serve the file from the plugin
-            if ( $theme_file = locate_template( array ( 'archives-commercant.php' ) ) ) {
-                $template_path = $theme_file;
-            } else {
-                $template_path = plugin_dir_path( __FILE__ ) . '/templates/archives-commercant.php';
-            }
-        }
-    return $template_path;
+	public function commercant_single_custom_template($template_path) {
+	
+		if ( get_post_type() == 'commercant' ) {
+			if ( is_single() ) {
+				// checks if the file exists in the theme first,
+				// otherwise serve the file from the plugin
+				if ( $theme_file = locate_template( array ( 'single-commercant.php' ) ) ) {
+					$template_path = $theme_file;
+				} else {
+					$template_path = plugin_dir_path( __FILE__ ) . '/templates/single-commercant.php';
+				}
+			}        
+		}
+		
+		return $template_path;
+		
 	}
 	
-
+	/**
+	 * commercant_archive_custom_template()
+	 *
+	 * Custom template for single commercant
+	 *
+	 * @uses string $content
+	 * @uses global $post
+	 * @return $content 
+	**/
+	
+	public function commercant_archive_custom_template($template_path) {
+	
+		if ( is_post_type_archive('commercant' ) ) {
+				// checks if the file exists in the theme first,
+				// otherwise serve the file from the plugin
+				if ( $theme_file = locate_template( array ( 'archives-commercant.php' ) ) ) {
+					$template_path = $theme_file;
+				} else {
+					$template_path = plugin_dir_path( __FILE__ ) . '/templates/archives-commercant.php';
+				}
+		}
+		
+		return $template_path;
+	
+	}
 	
 	
 }

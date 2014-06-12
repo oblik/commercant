@@ -3,30 +3,33 @@ get_header(); ?>
 
 <div id="content">
 
-	<?php if( have_posts() ) : ?>
+<?php
+$custom_terms = get_terms('custom_taxonomy');
 
-		<?php while( have_posts() ) : the_post(); ?>
+foreach($custom_terms as $custom_term) {
+    wp_reset_query();
+    $args = array('post_type' => 'custom_post_type',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'custom_taxonomy',
+                'field' => 'slug',
+                'terms' => $custom_term->slug,
+            ),
+        ),
+     );
 
-			
-			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+     $loop = new WP_Query($args);
+     if($loop->have_posts()) {
+        echo '<h2>'.$custom_term->name.'</h2>';
 
-				<div class="post-entry">
-					<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>		
-					<section class="entry-content clearfix" itemprop="articleBody">
-								<?php echo $commercantobject->getCommercantInfos('thumb'); ?>	
-								<?php echo $commercantobject->getCommercantInfos('Identite',$titre=false); ?>
-					</section> <!-- end article section -->
-				</div>
-				<!-- end of .post-entry -->
+        while($loop->have_posts()) : $loop->the_post();
+            echo '<a href="'.get_permalink().'">'.get_the_title().'</a>';
+        endwhile;
+     }
+}
+?>	
 
-				<!-- end of .navigation -->
 
-			</div><!-- end of #post-<?php the_ID(); ?> -->
-
-			<?php
-		endwhile;
-	endif;
-	?>
 
 </div><!-- end of #content -->
 
