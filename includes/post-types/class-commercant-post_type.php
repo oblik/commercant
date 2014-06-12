@@ -62,7 +62,7 @@ class commercant_Post_Type extends commercant {
 			'labels' => $labels,
 			'public' => true,
 			'publicly_queryable' => true,
-			'exclude_from_search' => true,
+			'exclude_from_search' => false,
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'show_in_nav_menus' => true,
@@ -71,7 +71,7 @@ class commercant_Post_Type extends commercant {
 			'capability_type' => 'post',
 			'has_archive' => true,
 			// 'hierarchical' => true,
-			'supports' => array( 'title'),
+			'supports' => array( 'title','thumbnail'),
 			'taxonomies' => array('post_tag'),
 			'menu_position' => 5,
 			'menu_icon' => ''

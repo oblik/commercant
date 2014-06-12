@@ -16,8 +16,9 @@ get_header(); ?>
 						<div class="post-entry">
 						
 						<a class="blue button" href="<?php echo get_post_type_archive_link( 'commercant' ); ?>"><?php _e('Retour','commercant'); ?></a>
-									
-						<?php echo $commercantobject->getCommercantInfos('photos',$titre=true); ?>
+						
+						<?php echo $commercantobject->getCommercantInfos('thumb'); ?>			
+						<?php echo $commercantobject->getCommercantInfos('photos'); ?>
 						<?php echo $commercantobject->getCommercantInfos('Identite',$titre=true); ?>
 						<?php echo $commercantobject->getCommercantInfos('localisation',$titre=true); ?>
 						<?php echo $commercantobject->getCommercantInfos('description',$titre=true); ?>

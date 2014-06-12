@@ -42,15 +42,10 @@ class commercant_Display extends commercant {
 				$commercant_photos_resize[] = $photo_resize['url'];
 			}
 			
-			foreach($commercant_photos[0] as $commercant_photo) {
-				$commercant_thumb = vt_resize( '', $commercant_photo, 140, 110, true );
-				break; 
-			}
 		
 		} else {
 		
 				$commercant_photos_resize = false;
-				$commercant_thumb = false;
 				
 		}
 		
@@ -86,7 +81,7 @@ class commercant_Display extends commercant {
 			'terms'								=>   wp_get_post_terms( $post->ID, 'cat_commercant'),
 			'tags'								=>	get_the_tags($post->ID),
 			'photos'							=>	$commercant_photos_resize,
-			'thumb'							=>  $commercant_thumb['url']
+			'thumb'							=>	get_the_post_thumbnail( $post->ID, 'medium')
 		);
 		
 	}
@@ -125,6 +120,16 @@ class commercant_Display extends commercant {
 		$commercant_item = $this->return_commercant_variables();		
 		$return = "";
 		$horairecheck = true;
+		
+		
+		// thumb
+		if ($part=="thumb") {
+			$return = "";
+			if (!empty($commercant_item['thumb'])) {
+				$return .= '<div class="thumb-commercant-single">' . $commercant_item['thumb'] . '</div>';
+			}
+			return($return);
+		}
 		
 		// Photos
 		if ($part=="photos") {
