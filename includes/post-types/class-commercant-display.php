@@ -4,7 +4,6 @@ class commercant_Display extends commercant {
 
 	public function __construct () {
 		define('BASE_URL', get_bloginfo('url'));
-		$commercantobject = commercant();
 		
 		add_filter( 'commercant_variables', 'return_commercant_variables' );
 		
@@ -18,6 +17,7 @@ class commercant_Display extends commercant {
 			add_filter('the_content', array( $this, 'insertCommercantInfos' ));
 		}
 		
+	
 	}
 		
 	/**
@@ -83,6 +83,7 @@ class commercant_Display extends commercant {
 			'h_dim_ma'						=>	get_post_meta( $post->ID, '_commercant_dimanche_matin', true ),
 			'h_dim_am'						=>	get_post_meta( $post->ID, '_commercant_dimanche_amidi', true ),
 			'accepte_paiement'			=>	get_post_meta( $post->ID, '_commercant_accepte_paiement', false ),
+			'terms'								=>   wp_get_post_terms( $post->ID, 'cat_commercant'),
 			'photos'							=>	$commercant_photos_resize,
 			'thumb'							=>  $commercant_thumb['url']
 		);
@@ -250,9 +251,27 @@ class commercant_Display extends commercant {
 			}
 			return($return);
 		}
+		
+		// Terms
+		if ($part=='terms') {
+			$return = '';
+			if (!empty($commercant_item['terms'])) {
+				if ($title != false) {$return .= '<h3>' . __('Cat&eacute;gories','commercant') . ' : </h3>';}
+				$return .= '<ul>';	
+				// $return .= print_r($commercant_item['terms']);				
+				foreach ($commercant_item['terms'] as $term) {
+					$term = sanitize_term( $term,'cat_commercant');
+					$term_link = get_term_link($term->term_id,'cat_commercant');
+					// If there was an error, continue to the next term.
+					if ( is_wp_error( $term_link ) ) {continue;}
+					$return .= '<li><a href="' . $term_link . '">' . $term->name . '</li>';
+				}
+				$return .= "</ul>";
+			return($return);
+		}
 
 	}
-
+}
 
 
 
