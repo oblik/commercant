@@ -10,7 +10,11 @@ class commercant_Display extends commercant {
 		
 		/*	Custom template pour archives commercant */
 		
-		add_filter('template_include', array($this, 'commercant_archive_custom_template'),1);	
+		add_filter('archive_template', array($this, 'commercant_archive_custom_template'),1);	
+		
+		/*	Custom template pour taxonomy commercant */
+		
+		add_filter('taxonomy_template', array($this, 'commercant_taxonomy_custom_template'),1);	
 		
 		/*	Choix du mode d'affichage pour la fiche commercant */
 	
@@ -58,13 +62,14 @@ class commercant_Display extends commercant {
 			'nom'								=>	$post->post_title,
 			'rue'									=>	get_post_meta( $post->ID, '_commercant_rue', true ),
 			'cp'									=>	get_post_meta( $post->ID, '_commercant_cp', true ),
-			'ville'								=>	get_post_meta( $post->ID, '_commercant_ville', true ),
+			'ville'									=>	get_post_meta( $post->ID, '_commercant_ville', true ),
 			'tel'									=>	get_post_meta( $post->ID, '_commercant_tel', true ),
 			'fax'									=>	get_post_meta( $post->ID, '_commercant_fax', true ),
-			'email'								=>	get_post_meta( $post->ID, '_commercant_email', true ),
+			'email'								=>	get_post_meta( $post->ID, '_commercant_email', true ),			
 			'url'									=>	get_post_meta( $post->ID, '_commercant_url', true ),
 			'facebook'						=>	get_post_meta( $post->ID, '_commercant_facebook', true ),
 			'description_generale'		=>	wpautop(get_post_meta( $post->ID, '_commercant_description_generale', true )),
+			'description_courte'			=>	wpautop(get_post_meta( $post->ID, '_commercant_description_generale', true )),
 			'localisation'						=>	get_post_meta( $post->ID, '_commercant_localisation', true ),
 			'horaires_infos'				=>	wpautop(get_post_meta( $post->ID, '_commercant_horaires_infos', true )),
 			'h_lun_ma'						=>	get_post_meta( $post->ID, '_commercant_lundi_matin', true ),
@@ -178,6 +183,18 @@ class commercant_Display extends commercant {
 				if ($title != false) {$return .= "<h3>" . __('Description generale','commercant') . " : </h3>";}
 				$return .= "<div class='commercant-item-description-generale'>";
 				$return .= $commercant_item['description_generale'];
+				$return .= "</div>";
+			}
+			return($return);
+		}
+		
+		// Description courte
+		if ($part=="description_courte") {
+			$return = "";
+			if(!empty($commercant_item['description_courte'])) {
+				if ($title != false) {$return .= "<h3>" . __('Description courte','commercant') . " : </h3>";}
+				$return .= "<div class='commercant-item-description-courte'>";
+				$return .= $this->ttruncat(strip_tags ($commercant_item['description_courte']),100);
 				$return .= "</div>";
 			}
 			return($return);
@@ -368,22 +385,66 @@ class commercant_Display extends commercant {
 	 * @return $content 
 	**/
 	
-	public function commercant_archive_custom_template($template_path) {
+	public function commercant_archive_custom_template($template_path_archives) {
 	
 		if ( is_post_type_archive('commercant' ) ) {
 				// checks if the file exists in the theme first,
 				// otherwise serve the file from the plugin
 				if ( $theme_file = locate_template( array ( 'archives-commercant.php' ) ) ) {
-					$template_path = $theme_file;
+					$template_path_archives = $theme_file;
 				} else {
-					$template_path = plugin_dir_path( __FILE__ ) . '/templates/archives-commercant.php';
+					$template_path_archives = plugin_dir_path( __FILE__ ) . '/templates/archives-commercant.php';
 				}
 		}
 		
-		return $template_path;
+		return $template_path_archives;
 	
 	}
 	
+	/**
+	 * commercant_taxonomy_custom_template()
+	 *
+	 * Custom template for taxonomy commercant
+	 *
+	 * @uses string $content
+	 * @uses global $post
+	 * @return $content 
+	**/
+	
+	public function commercant_taxonomy_custom_template($template_path_archives) {
+	
+		if ( is_tax('cat_commercant' ) ) {
+				// checks if the file exists in the theme first,
+				// otherwise serve the file from the plugin
+				if ( $theme_file = locate_template( array ( 'taxonomy-cat_commercant.php' ) ) ) {
+					$template_path_archives = $theme_file;
+				} else {
+					$template_path_archives = plugin_dir_path( __FILE__ ) . '/templates/taxonomy-cat_commercant.php';
+				}
+		}
+		
+		return $template_path_archives;
+	
+	}
+	
+	/**
+	 * ttruncat($text,$numb) 
+	 *
+	 * Extrait de text
+	 *
+	 * @uses string $text, $numb
+	 * @return $text 
+	**/
+	
+	public function ttruncat($text,$numb) {
+		if (strlen($text) > $numb) { 
+		  $text = substr($text, 0, $numb); 
+		  $text = substr($text,0,strrpos($text," ")); 
+		  $etc = " ...";  
+		  $text = $text.$etc; 
+		  }
+		return $text; 
+	}
 	
 }
 ?>

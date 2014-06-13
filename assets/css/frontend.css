@@ -51,3 +51,122 @@ margin:0;
 .owl-carousel-commercant-single .owl-item {
 text-align:center;
 }
+
+/* archives */
+
+.commercant-tax-category {
+	width:33%;
+	float:left;
+	color:#fff;
+	padding:0px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;      
+	margin:0;
+}
+
+.commercant-tax-category .commercant-tax-category-inner {
+	margin:0 5px;
+	padding:0px;
+	border:1px solid #E7E7E7;
+}
+
+.commercant-tax-category .commercant-tax-category-inner h2 {
+	border-bottom: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	font-size: 16px;
+	margin: 0 0 15px;
+	padding: 10px;
+}
+
+.commercant-tax-category .commercant-tax-category-inner ul {
+	margin:20px 30px;
+	padding:0;
+	list-style-type:none outside none;
+}
+
+.commercant-tax-category .commercant-tax-category-inner ul li {
+	margin:0;
+	padding:0;
+	list-style:none outside none !important;
+}
+
+.commercant-tax-category .commercant-tax-category-inner a {
+	background: url("../images/link-arrow.png") no-repeat scroll left center transparent;
+	color:#666 !important;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+	padding-left: 15px;
+}
+
+/* taxonomy */
+
+.tax-cat_commercant .post-entry  {
+	border-bottom: 1px solid #EAEAEA;
+	overflow: hidden;
+	padding: 20px 0;
+	position: relative;
+}
+
+.tax-cat_commercant .post-entry .commercant-listing-title {
+	margin:0;
+}
+
+.tax-cat_commercant .post-entry .commercant-listing-title a {
+  font-size: 18px;
+  height: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.tax-cat_commercant .post-entry div.commercant-listing-image {
+  float: left;
+  position: relative;
+  width: 140px;
+}
+
+.tax-cat_commercant .post-entry div.commercant-listing-image img {
+	margin:0 !important;
+}
+
+.tax-cat_commercant .post-entry div.commercant-listing-body {
+  float: left;
+  overflow: hidden;
+  padding: 0;
+  width: 440px;
+}
+
+.tax-cat_commercant .post-entry-with-image div.commercant-listing-body {
+  padding: 0 20px;
+}
+
+.tax-cat_commercant .post-entry .commercant-item-description-generale p {
+margin:0;
+}
+
+.tax-cat_commercant .post-entry .commercant-listing-categories,
+.tax-cat_commercant .post-entry .commercant-item-description-courte {
+margin:0 0 10px 0;
+}
+
+/* micro clearfix */
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}

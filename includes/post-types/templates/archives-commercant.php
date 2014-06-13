@@ -21,17 +21,22 @@ foreach($custom_terms as $custom_term) {
      $loop = new WP_Query($args);
      if($loop->have_posts()) {
 		$commercant_tax_bgcolor = get_tax_meta($custom_term->term_id,'commercant_tax_color');
+		echo '<div class="commercant-tax-category" >';
+		echo '<div class="commercant-tax-category-inner" >';
 		if (!empty($commercant_tax_bgcolor)) {
-			echo '<div class="commercant-tax-category" style="background-color:' . $commercant_tax_bgcolor . '">';
+			echo '<div class="commercant-tax-category-inner-title" style="background-color:' . $commercant_tax_bgcolor . '">';
 		} else { 
-			echo '<div class="commercant-tax-category" >';
+			echo '<div class="commercant-tax-category-inner-title" >';
 		}
-        echo '<h2>'.$custom_term->name.'</h2>';
-		echo '<ul>';
-        while($loop->have_posts()) : $loop->the_post();
-            echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
-        endwhile;
-		echo '</ul>';
+			echo '<h2>'.$custom_term->name.'</h2>';
+			
+			echo '</div>';
+			echo '<ul>';
+			while($loop->have_posts()) : $loop->the_post();
+				echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
+			endwhile;
+			echo '</ul>';
+			echo '</div>';
 		echo '</div>';
      }
 }
