@@ -90,7 +90,7 @@ class commercant_Display extends commercant {
 			'terms'								=>   wp_get_post_terms( $post->ID, 'cat_commercant'),
 			'tags'								=>	get_the_tags($post->ID),
 			'photos'							=>	$commercant_photos_resize,
-			'thumb'							=>	get_the_post_thumbnail( $post->ID, 'medium')
+			'thumb'							=>	get_the_post_thumbnail( $post->ID, 'thumbnail')
 		);
 		
 	}
@@ -303,7 +303,7 @@ class commercant_Display extends commercant {
 			$return = '';
 			if (!empty($commercant_item['tags'])) {
 				if ($title != false) {$return .= '<h3>' . __('Tags','commercant') . ' : </h3>';}				
-				$return .= '<ul>';				
+				$return .= '<ul class="commercant-tag-list">';				
 				foreach ($commercant_item['tags'] as $tag) {
 					$return .= '<li><a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a></li>';
 				}

@@ -117,11 +117,11 @@ class commercant {
 	 */
 	public function enqueue_styles () {
 	
-		if(get_option ('commercant_fontawesome') != 1) {		
+		if(get_option ('wpt_commercant_unload_fontawesome') != 'on') {		
 			wp_enqueue_style( 'commercant-fontawesome', esc_url( $this->assets_url )  . 'css/font-awesome.min.css');
 		}
 		
-		if (get_option ('commercant_cssowlcarousel') != 1) {	
+		if (get_option ('wpt_commercant_unload_owl') != 'on') {	
 			wp_enqueue_style( 'commercant-caroussel', esc_url( $this->includes_dir )  . 'lib/owl-carousel/owl.carousel.css');
 			wp_enqueue_style( 'commercant-theme', esc_url( $this->includes_dir )  . 'lib/owl-carousel/owl.theme.css');
 			wp_enqueue_style( 'commercant-transitions', esc_url( $this->includes_dir )  . 'lib/owl-carousel/owl.transitions.css');
@@ -143,12 +143,12 @@ class commercant {
 		wp_enqueue_script( $this->_token . '-frontend' );
 
 
-		
-		if (get_option ('agenda_jsowlcarousel') != 1) {		
+
+		if (get_option ('wpt_commercant_unload_owl') != 'on') {		
 		wp_enqueue_script( 'commercant-owlcarousel-script', esc_url( $this->includes_dir )  . 'lib/owl-carousel/owl.carousel.min.js', array('jquery'), '', true );
 		}
 		
-		if (get_option ('commercant-gmaps') != 1) {		
+		if (get_option ('wpt_commercant_unload_gmaps') != 'on') {		
 			wp_enqueue_script( 'commercant-gmaps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false', array('jquery'), '3.0', true );
 		}
 		

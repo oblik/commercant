@@ -26,10 +26,10 @@ foreach($custom_terms as $custom_term) {
 		if (!empty($commercant_tax_bgcolor)) {
 			echo '<div class="commercant-tax-category-inner-title" style="background-color:' . $commercant_tax_bgcolor . '">';
 		} else { 
-			echo '<div class="commercant-tax-category-inner-title" >';
+			echo '<div class="commercant-tax-category-inner-title" >';		
 		}
-			echo '<h2>'.$custom_term->name.'</h2>';
-			
+			echo '<div class="commercant-tax-category-count">' . $loop->post_count . '</div>';
+			echo '<h2>'.$custom_term->name.'</h2>';			
 			echo '</div>';
 			echo '<ul>';
 			while($loop->have_posts()) : $loop->the_post();

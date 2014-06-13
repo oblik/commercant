@@ -118,7 +118,28 @@ class commercant_Settings {
 					'type'			=> 'radio',
 					'options'		=> array( 'check1' => 'Utiliser le template "single-commercant.php" situ&eacute; dans votre theme, sinon dans le repertoire "includes/post-types/templates/" du plugin, <strong>&agrave; modifier suivant votre th&egrave;me</strong>.', 'check2' => 'Utiliser le template "single.php" du theme actif, <strong>remplace la partie the_content();</strong>'),
 					'default'		=> 'check2'
-				)
+				),
+				array(
+					'id' 			=> 'commercant_unload_owl',
+					'label'			=> __( 'D&eacute;sactiver le chargement du script Owl Carousel', 'commercant' ),
+					'description'	=> __( 'A d&eacute;sactiver si vous avez d&eacute;j&agrave; ce script charg&eacute; depuis votre th&egrave;me, ou un autre plugin.', 'commercant' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'commercant_unload_fontawesome',
+					'label'			=> __( 'D&eacute;sactiver le chargement du CSS Font Awesome', 'commercant' ),
+					'description'	=> __( 'A d&eacute;sactiver si vous avez d&eacute;j&agrave; ce CSS charg&eacute; depuis votre th&egrave;me, ou un autre plugin.', 'commercant' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'commercant_unload_gmaps',
+					'label'			=> __( 'D&eacute;sactiver le chargement du script Google Maps API V3', 'commercant' ),
+					'description'	=> __( 'A d&eacute;sactiver si vous avez d&eacute;j&agrave; ce script charg&eacute; depuis votre th&egrave;me, ou un autre plugin.', 'commercant' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
 			)
 		);
 

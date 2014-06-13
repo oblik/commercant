@@ -1,6 +1,7 @@
 .commercant-item-map {
-height:350px;
-width:100%;
+  height: 350px;
+  margin: 0 0 20px;
+  width: 100%;
 }
 
 /* fix bug max-with google maps */
@@ -46,10 +47,87 @@ margin:0;
 	right:0;
 	text-align:right;
 	top: -47px;
+	display:none;
 }
 
 .owl-carousel-commercant-single .owl-item {
 text-align:center;
+}
+
+/* tags */
+
+.commercant-tag-list {
+margin:0 0 15px 0 !important;
+padding:0 !important;
+}
+
+.commercant-tag-list,
+.commercant-tag-list li {
+list-style:none outside none !important;
+}
+
+.commercant-tag-list li {
+display:inline-block;
+border: 1px solid #DEDEDE;
+padding:0;
+margin:0 10px 0 0;
+}
+
+.commercant-tag-list li a {
+display:inline-block;
+float: left;
+height: 38px;
+line-height: 38px;
+margin: 0;
+padding: 0 20px;
+}
+
+/* single */
+
+.owl-carousel-commercant-single {
+margin:0 0 30px 0;
+}
+
+.hentry.commercant p,
+.commercant-item-description-generale p,
+.commercant-item-description-generale ul,
+.thumb-commercant-single img.attachment-thumbnail.wp-post-image,
+.single-commercant .commercant-listing-categories,
+.commercant-single-identite p {
+margin:0 0 10px 0;
+}
+
+.post-entry-with-image .commercant-single-thumb {
+float:left;
+width:150px;
+margin:0 0 20px 0;
+}
+
+.post-entry-with-image .commercant-single-identite {
+padding-left:170px;
+}
+
+.commercant-single-thumb img{
+max-height:150px;
+max-width:150px;
+}
+
+.commercant-table-horaires th,.commercant-table-horaires td {
+  border: 1px solid #DDDDDD;
+  font-size: 13px;
+  padding: 7px !important;
+}
+
+.single-commercant h3 {
+font-size: 18px;
+margin: 0;
+padding: 20px 0;
+}
+
+
+.commercant-single-identite h2.entry-title {
+margin:0;
+font-size:24px;
 }
 
 /* archives */
@@ -72,11 +150,13 @@ text-align:center;
 }
 
 .commercant-tax-category .commercant-tax-category-inner h2 {
-	border-bottom: 1px solid #FFFFFF;
-	color: #FFFFFF;
-	font-size: 16px;
-	margin: 0 0 15px;
-	padding: 10px;
+  border-bottom: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 0 15px;
+  padding: 0 10px;
 }
 
 .commercant-tax-category .commercant-tax-category-inner ul {
@@ -99,6 +179,15 @@ text-align:center;
 	line-height: 30px;
 	overflow: hidden;
 	padding-left: 15px;
+}
+
+.commercant-tax-category-count {
+  border-left: 1px solid #FFFFFF;
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 0 0 20px;
+  padding: 0 15px;
 }
 
 /* taxonomy */
@@ -169,4 +258,44 @@ margin:0 0 10px 0;
  */
 .cf {
     *zoom: 1;
+}
+
+/* *********************************************************************************************************************
+ * Common columns definitions
+ */
+.commercant-col1, .commercant-col2, .commercant-col3, .commercant-col4, .commercant-col5, .commercant-col6, .commercant-col7, .commercant-col8, .commercant-col9, .commercant-col10, .commercant-col11, .commercant-col12 {
+	float: left;
+	margin: 0 3% 0 0;
+}
+
+.commercant-col1.last, .commercant-col2.last, .commercant-col3.last, .commercant-col4.last, .commercant-col5.last, .commercant-col6.last, .commercant-col7.last, .commercant-col8.last, .commercant-col9.last, .commercant-col10.last, .commercant-col11.last, .commercant-col12 {
+	margin: 0;
+}
+
+.commercant-col1 { width: 5.5%; }
+.commercant-col2 { width: 14%; }
+.commercant-col3 { width: 22.5%; }
+.commercant-col4 { width: 31%; }
+.commercant-col5 { width: 39.5%; }
+.commercant-col6 { width: 48%; }
+.commercant-col7 { width: 56.5%; }
+.commercant-col8 { width: 65%; }
+.commercant-col9 { width: 73.5%; }
+.commercant-col10 { width: 82%; }
+.commercant-col11 { width: 90.5%; }
+.commercant-col12 { width: 99%; margin: 0; }
+
+
+
+/* *********************************************************************************************************************
+ * Small devices
+ */
+@media all and (max-width: 768px) {
+	.onerow {
+	}
+
+	.commercant-col1, .commercant-col2, .commercant-col3, .commercant-col4, .commercant-col5, .commercant-col6, .commercant-col7, .commercant-col8, .commercant-col9, .commercant-col10, .commercant-col11 {
+		float: none;
+		width: 99%;
+	}
 }
