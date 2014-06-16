@@ -20,10 +20,14 @@ $(".commercant-item-map").each(function() {
 		  new google.maps.Point(15,41)
 		);
 		
-		
-		var locations = [
-		  ['<div class="info_gmaps"><div class="info_gmaps_photo"><img src="'+commercant_data.thumb+'" alt="'+commercant_data.nom+'" /></div><p><strong>'+commercant_data.nom+'</strong><br/>'+commercant_data.rue+'<br/>'+commercant_data.cp+' '+commercant_data.ville+'<br/>T&eacute;l. '+commercant_data.tel+'</p></div>', mapGps.latitude,mapGps.longitude, 1]
-		];
+		// Photo commercant
+		if ($('#myElement').length > 0) { 
+			var photocommercant = '<div class="info_gmaps_photo"><img src="'+commercant_data.thumb+'" alt="'+commercant_data.nom+'" /></div>';
+		} else { 
+			var photocommercant =""; 
+		}
+				
+		var locations = [['<div class="info_gmaps">'+photocommercant+'<p><strong>'+commercant_data.nom+'</strong><br/>'+commercant_data.rue+'<br/>'+commercant_data.cp+' '+commercant_data.ville+'<br/>T&eacute;l. '+commercant_data.tel+'</p></div>', mapGps.latitude,mapGps.longitude, 1]];
 
 		var map = new google.maps.Map(document.getElementById(mapId), {
 		  zoom: 12,
