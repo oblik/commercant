@@ -13,6 +13,10 @@ class commercant_Post_Type extends commercant {
 
 		// Register taxonomy
 		add_action('init', array( $this, 'register_taxonomy' ) );
+		
+		// Add post type tags to archive page
+		add_action( 'pre_get_posts',array( $this, 'add_tags_post_type_archive' )  );
+
 
 		if ( is_admin() ) {
 
@@ -30,6 +34,7 @@ class commercant_Post_Type extends commercant {
 			// Handle post columns
 			add_filter( 'manage_edit-' . $this->_token . '_columns', array( $this, 'register_custom_column_headings' ), 10, 1 );
 			add_action( 'manage_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
+			
 
 		
 		}
@@ -66,7 +71,7 @@ class commercant_Post_Type extends commercant {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'show_in_nav_menus' => true,
-			'query_var' => false,
+			'query_var' => true,
 			'rewrite' => array('slug' => 'commercant'),			
 			'capability_type' => 'post',
 			'has_archive' => true,
@@ -79,6 +84,7 @@ class commercant_Post_Type extends commercant {
 		
 		
 		register_post_type( $this->_token, $args );
+		
 		// flush_rewrite_rules();
 	}
 
@@ -111,6 +117,8 @@ class commercant_Post_Type extends commercant {
 
         register_taxonomy( 'cat_commercant' , $this->_token , $args );
     }
+	
+
 
     /**
      * Regsiter column headings for post type
@@ -143,6 +151,18 @@ class commercant_Post_Type extends commercant {
 		return $defaults;
 	}
 
+	/**
+	 * add_tags_post_type_archive
+	 * @param  object  $query 
+	 */
+	
+	public function add_tags_post_type_archive($query) {
+			if ( $query->is_tag() && $query->is_main_query() ) {
+				$query->set( 'post_type', array( 'post', $this->_token ) );
+			}
+	}
+	
+	
 	/**
 	 * Load data for post type columns
 	 * @param  string  $column_name Name of column
@@ -190,97 +210,7 @@ class commercant_Post_Type extends commercant {
 	  return $messages;
 	}
 
-	/**
-	 * Add meta box to post type
-	 * @return void
-	 */
-	public function meta_box_setup () {
-		add_meta_box( 'post-data', __( 'Post Details' , 'commercant' ), array( $this, 'meta_box_content' ), $this->_token, 'normal', 'high' );
-	}
 
-	/**
-	 * Load meta box content
-	 * @return void
-	 */
-	public function meta_box_content () {
-		global $post_id;
-		$fields = get_post_custom( $post_id );
-		$field_data = $this->get_custom_fields_settings();
-
-		$html = '';
-
-		$html .= '<input type="hidden" name="' . $this->_token . '_nonce" id="' . $this->_token . '_nonce" value="' . wp_create_nonce( plugin_basename( $this->dir ) ) . '" />';
-
-		if ( 0 < count( $field_data ) ) {
-			$html .= '<table class="form-table">' . "\n";
-			$html .= '<tbody>' . "\n";
-
-			foreach ( $field_data as $k => $v ) {
-				$data = $v['default'];
-
-				if ( isset( $fields[$k] ) && isset( $fields[$k][0] ) ) {
-					$data = $fields[$k][0];
-				}
-
-				if( $v['type'] == 'checkbox' ) {
-					$html .= '<tr valign="top"><th scope="row">' . $v['name'] . '</th><td><input name="' . esc_attr( $k ) . '" type="checkbox" id="' . esc_attr( $k ) . '" ' . checked( 'on' , $data , false ) . ' /> <label for="' . esc_attr( $k ) . '"><span class="description">' . $v['description'] . '</span></label>' . "\n";
-					$html .= '</td><tr/>' . "\n";
-				} else {
-					$html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr( $k ) . '">' . $v['name'] . '</label></th><td><input name="' . esc_attr( $k ) . '" type="text" id="' . esc_attr( $k ) . '" class="regular-text" value="' . esc_attr( $data ) . '" />' . "\n";
-					$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
-					$html .= '</td><tr/>' . "\n";
-				}
-
-			}
-
-			$html .= '</tbody>' . "\n";
-			$html .= '</table>' . "\n";
-		}
-
-		echo $html;
-	}
-
-	/**
-	 * Save meta box
-	 * @param  integer $post_id Post ID
-	 * @return void
-	 */
-	public function meta_box_save ( $post_id ) {
-		global $post, $messages;
-
-		// Verify nonce
-		if ( ( get_post_type() != $this->_token ) || ! wp_verify_nonce( $_POST[ $this->_token . '_nonce'], plugin_basename( $this->dir ) ) ) {
-			return $post_id;
-		}
-
-		// Verify user permissions
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return $post_id;
-		}
-
-		// Handle custom fields
-		$field_data = $this->get_custom_fields_settings();
-		$fields = array_keys( $field_data );
-
-		foreach ( $fields as $f ) {
-
-			if( isset( $_POST[$f] ) ) {
-				${$f} = strip_tags( trim( $_POST[$f] ) );
-			}
-
-			// Escape the URLs.
-			if ( 'url' == $field_data[$f]['type'] ) {
-				${$f} = esc_url( ${$f} );
-			}
-
-			if ( ${$f} == '' ) {
-				delete_post_meta( $post_id , $f , get_post_meta( $post_id , $f , true ) );
-			} else {
-				update_post_meta( $post_id , $f , ${$f} );
-			}
-		}
-
-	}
 
 	/**
 	 * Load custom title placeholder text
