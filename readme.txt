@@ -1,20 +1,16 @@
 === commercant ===
-Contributors: hlashbrooke
-Donate link: http://www.hughlashbrooke.com/donate
-Tags: wordpress, plugin, template
+Contributors: https://twitter.com/oblik
+Tags: wordpress, plugin, commercant
 Requires at least: 3.8
 Tested up to: 3.8.1
 Stable tag: 1.0
 
-{short_description}
-
 == Description ==
 
-{long_description}
+Plugin pour la gestion de listings commercants.
 
 == Usage ==
 
-{usage_notes}
 
 == Installation ==
 
