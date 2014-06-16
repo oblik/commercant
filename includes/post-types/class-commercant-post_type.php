@@ -74,7 +74,7 @@ class commercant_Post_Type extends commercant {
 			'supports' => array( 'title','thumbnail'),
 			'taxonomies' => array('post_tag'),
 			'menu_position' => 5,
-			'menu_icon' => ''
+			'menu_icon'           => 'dashicons-groups',
 		);
 		
 		
