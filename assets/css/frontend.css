@@ -130,6 +130,32 @@ margin:0;
 font-size:24px;
 }
 
+.commercant-actus-list-item-thumb {
+float:left;
+width:30%;
+}
+
+/* actus commercant */
+
+.commercant-actus-list-item {
+  border: 1px solid #DEDEDE;
+  margin: 0 0 20px;
+  padding: 20px 20px 5px 20px;
+}
+.commercant-actus-list-item-thumb img.attachment-thumbnail {
+margin:0;
+}
+
+.commercant-actus-list-item-content {
+float:left;
+width:70%;
+}
+
+.commercant-actus-list-item-content h3 {
+padding:0;
+margin:0 0 15px 0;
+}
+
 /* archives */
 
 .commercant-tax-category {

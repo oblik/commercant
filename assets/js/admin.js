@@ -1,6 +1,7 @@
 jQuery( document ).ready( function ( $ ) {
 	
-		// slide sur la fiche commercant
+	
+	// slide sur la fiche commercant
 	
 	$('#commercant_metabox .cmb_metabox .cmb-type-title').each(function() {	
 		$(this).find('td').append('<span class="toggle-section close"></span>').wrapInner('<a href="#" class="toggle-section close"></a>');

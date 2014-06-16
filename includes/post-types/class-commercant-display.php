@@ -68,8 +68,7 @@ class commercant_Display extends commercant {
 			'email'								=>	get_post_meta( $post->ID, '_commercant_email', true ),			
 			'url'									=>	get_post_meta( $post->ID, '_commercant_url', true ),
 			'facebook'						=>	get_post_meta( $post->ID, '_commercant_facebook', true ),
-			'description_generale'		=>	wpautop(get_post_meta( $post->ID, '_commercant_description_generale', true )),
-			'description_courte'			=>	wpautop(get_post_meta( $post->ID, '_commercant_description_generale', true )),
+			'description_generale'		=>	get_the_content( $post->ID),
 			'localisation'						=>	get_post_meta( $post->ID, '_commercant_localisation', true ),
 			'horaires_infos'				=>	wpautop(get_post_meta( $post->ID, '_commercant_horaires_infos', true )),
 			'h_lun_ma'						=>	get_post_meta( $post->ID, '_commercant_lundi_matin', true ),
@@ -130,6 +129,7 @@ class commercant_Display extends commercant {
 		$return = "";
 		$horairecheck = true;
 		
+		global $post;
 		
 		// thumb
 		if ($part=="thumb") {
@@ -187,19 +187,7 @@ class commercant_Display extends commercant {
 			}
 			return($return);
 		}
-		
-		// Description courte
-		if ($part=="description_courte") {
-			$return = "";
-			if(!empty($commercant_item['description_courte'])) {
-				if ($title != false) {$return .= "<h3>" . __('Description courte','commercant') . " : </h3>";}
-				$return .= "<div class='commercant-item-description-courte'>";
-				$return .= $this->ttruncat(strip_tags ($commercant_item['description_courte']),100);
-				$return .= "</div>";
-			}
-			return($return);
-		}
-		
+
 		// Horaires
 		if ($part=="horaires") {
 			$return = "";
@@ -312,6 +300,46 @@ class commercant_Display extends commercant {
 			}
 
 		}
+		
+		// Articles associes
+		if ($part=='actu') {
+			$return = '';
+			$activetagId = array();
+			
+			if (!empty($commercant_item['tags'])) {
+				if ($title != false) {$return .= '<h3>' . __('Articles associ&eacute;s','commercant') . ' : </h3>';}	
+				
+				// Get active Tags ID in array
+				foreach ($commercant_item['tags'] as $tag) {
+					$activetagId[] = $tag->term_id;
+				}
+				// $return .= implode(',',$activetagId);  
+				$query = new WP_Query( 'tag_id=' . implode(',',$activetagId) );
+				$return .= '<div class="commercant-actus-list">';	
+				// The Loop
+				if ( $query->have_posts() ) {
+					while ( $query->have_posts() ) {
+						$query->the_post();
+						$return .= '<div class="commercant-actus-list-item cf">
+						<div class="commercant-actus-list-item-thumb"><a href="' . get_the_permalink($post->ID) . '" class="commercant-actus-list-item-link-thumb">'.get_the_post_thumbnail( $post->ID, 'thumbnail').'</a></div>
+						<div class="commercant-actus-list-item-content">
+						<h3><a href="' . get_the_permalink($post->ID) . '" class="commercant-actus-list-item-link">' . get_the_title($post->ID)  . '</a></h3>
+						<p>' . get_the_excerpt()  . '</p>
+						</div>
+						</div>';							
+					}
+				} 
+
+
+				$return .= '</div>';
+				// Restore original Post Data
+				wp_reset_postdata();
+										
+				return($return);
+			}
+		}
+		
+		
 }
 
 

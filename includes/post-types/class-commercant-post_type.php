@@ -76,7 +76,7 @@ class commercant_Post_Type extends commercant {
 			'capability_type' => 'post',
 			'has_archive' => true,
 			// 'hierarchical' => true,
-			'supports' => array( 'title','thumbnail'),
+			'supports' => array( 'title','thumbnail','editor'),
 			'taxonomies' => array('post_tag'),
 			'menu_position' => 5,
 			'menu_icon'           => 'dashicons-groups',
@@ -224,22 +224,6 @@ class commercant_Post_Type extends commercant {
 		return $title;
 	}
 
-	/**
-	 * Load custom fields for post type
-	 * @return array Custom fields array
-	 */
-	public function get_custom_fields_settings () {
-		$fields = array();
-
-		$fields['_custom_field'] = array(
-		    'name' => __( 'Custom field:' , 'commercant' ),
-		    'description' => __( 'Description of this custom field.' , 'commercant' ),
-		    'type' => 'text',
-		    'default' => '',
-		    'section' => 'plugin-data'
-		);
-
-		return $fields;
-	}
+	
 
 }

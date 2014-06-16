@@ -36,6 +36,7 @@ get_header(); ?>
 								<div class="commercant-col12">
 									<?php echo $commercantobject->getCommercantInfos('description',$titre=true); ?>
 									<?php echo $commercantobject->getCommercantInfos('tags',$titre=true); ?>
+									<?php echo $commercantobject->getCommercantInfos('actu',$titre=true); ?>
 								</div>
 								
 							</div>
@@ -43,7 +44,7 @@ get_header(); ?>
 							<div class="commercant-col4 last">
 							<?php echo $commercantobject->getCommercantInfos('localisation',$titre=true); ?>						
 							<?php echo $commercantobject->getCommercantInfos('horaires',$titre=true); ?>
-							<?php echo $commercantobject->getCommercantInfos('plus',$titre=true); ?>
+							<?php echo $commercantobject->getCommercantInfos('plus',$titre=true); ?>														
 							</div>
 													
 							
