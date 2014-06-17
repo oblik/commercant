@@ -31,6 +31,7 @@ foreach($custom_terms as $custom_term) {
 			echo '<div class="commercant-tax-category-count">' . $loop->post_count . '</div>';
 			echo '<h2>'.$custom_term->name.'</h2>';			
 			echo '</div>';
+			echo term_description($custom_term->term_id,'cat_commercant'); 			
 			echo '<ul>';
 			while($loop->have_posts()) : $loop->the_post();
 				echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';

@@ -9,7 +9,7 @@ get_header(); ?>
 
 <div id="taxonomy-archive" >
 	
-	<h2><?php _e('Cat&eacute;gorie','commercant');?> <?php single_term_title(); ?></h2>
+	<h2><?php single_term_title(); ?></h2>
 	
 	<?php echo category_description(); ?> 
 	
@@ -33,9 +33,10 @@ get_header(); ?>
 					<!-- Body -->
 					<div class="commercant-listing-body">
 						<h3 class="commercant-listing-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
-						<div class="commercant-listing-categories"> <?php echo get_the_term_list( $post->ID, 'cat_commercant', '', ', ', '' ); ?></div> 				
+						<div class="commercant-listing-categories"> <?php echo get_the_term_list( $post->ID, 'cat_commercant', '', ', ', '' ); ?></div>
+						<?php echo $commercantobject->getCommercantInfos('adresse'); ?>
 						<div class="commercant-listing-text"><?php echo get_the_excerpt(); ?></div>
-						<div class="commercant-listing-more"><a href="<?php the_permalink(); ?>" class="button">En savoir plus</a></div>
+						<!-- <div class="commercant-listing-more"><a href="<?php the_permalink(); ?>" class="button">En savoir plus</a></div> -->
 					</div>
 					
 				</div>

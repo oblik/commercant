@@ -168,6 +168,16 @@ class commercant_Display extends commercant {
 			return($return);
 		}
 		
+		// Identite
+		if ($part=="adresse") {
+			$return = "";
+			if ($title != false) {$return .= "<h3>" . __('Adresse ','commercant') . " : </h3>";}
+			if (!empty($commercant_item['rue'])) { $return .= '<p class="commercant-item-adresse">' . $commercant_item['rue']; }
+			if (!empty($commercant_item['cp'])) { $return .= ' ' . $commercant_item['cp'];  }
+			if (!empty($commercant_item['ville'])) { $return .= ' ' . $commercant_item['ville'] . "</p>";  }
+			return($return);
+		}
+		
 		// Localisation
 		if ($part=="localisation") {
 			$return = "";
