@@ -8,6 +8,11 @@ if( !defined( 'ABSPATH' ) ) {
 get_header(); ?>
 
 <div id="taxonomy-archive" >
+
+	<?php 
+	$tax_id = get_queried_object()->term_id;
+	echo commercant_Display::Maps_Commercant_by_Taxonomy('localisation',$tax_id);
+	?>
 	
 	<h2><?php single_term_title(); ?></h2>
 	

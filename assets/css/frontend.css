@@ -1,3 +1,4 @@
+.commercant-by-taxonomy-map,
 .commercant-item-map {
   height: 350px;
   margin: 0 0 20px;
@@ -5,11 +6,12 @@
 }
 
 /* fix bug max-with google maps */
-
-.commercant-item-map img{
-max-width: none;
+.commercant-by-taxonomy-map img, .commercant-item-map img {
+  margin: 0 !important;
+  max-width: none;
 }
 
+.commercant-by-taxonomy-map label,
 .commercant-item-map label {
 width: auto; display: inline;
 }

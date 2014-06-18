@@ -40,7 +40,8 @@ class commercant_Display extends commercant {
 	public function return_commercant_variables() {
 
 		global $post;
-		// recuperation de la premiere image et retaille
+		
+		// recuperation des photos
 		$commercant_photos = get_post_meta( $post->ID, '_commercant_photos', false );
 		
 		if (!empty($commercant_photos)) {
@@ -93,6 +94,85 @@ class commercant_Display extends commercant {
 		);
 		
 	}
+	
+	
+	/**
+	 * return_all_commercants_variables()
+	 *
+	 * Recupere les metabox des commercants de la taxonomy
+	 *
+	 * @uses global $post
+	 * @return array 
+	**/
+
+	public function return_all_commercants_variables($tax_id) {
+		
+		// variable
+		
+		$return = array();
+		
+		// recuperation des posts de la taxonomy
+		
+		$posts_active_tax = get_posts(array(
+											'post_type' => 'commercant',
+											'tax_query' => array(
+												array(
+												'taxonomy' => 'cat_commercant',
+												'field' => 'term_id',
+												'terms' => $tax_id)
+											))
+										);
+		
+		if (!empty($posts_active_tax))  {
+		
+			 foreach ($posts_active_tax as $post_active_tax) {
+			 
+				 // var_dump($post_active_tax);
+				// echo $post_active_tax->ID . '<br/>';
+				
+				$return[] = array (
+					'nom'								=>	$post_active_tax->post_title,
+					'rue'									=>	get_post_meta( $post_active_tax->ID, '_commercant_rue', true ),
+					'cp'									=>	get_post_meta( $post_active_tax->ID, '_commercant_cp', true ),
+					'ville'									=>	get_post_meta( $post_active_tax->ID, '_commercant_ville', true ),
+					'tel'									=>	get_post_meta( $post_active_tax->ID, '_commercant_tel', true ),
+					'fax'									=>	get_post_meta( $post_active_tax->ID, '_commercant_fax', true ),
+					'email'								=>	get_post_meta( $post_active_tax->ID, '_commercant_email', true ),			
+					'url'									=>	get_post_meta( $post_active_tax->ID, '_commercant_url', true ),
+					'facebook'						=>	get_post_meta( $post_active_tax->ID, '_commercant_facebook', true ),
+					'description_generale'		=>	get_the_content( $post_active_tax->ID),
+					'localisation'						=>	get_post_meta( $post_active_tax->ID, '_commercant_localisation', true ),
+					'horaires_infos'				=>	wpautop(get_post_meta( $post_active_tax->ID, '_commercant_horaires_infos', true )),
+					'h_lun_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_lundi_matin', true ),
+					'h_lun_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_lundi_amidi', true ),
+					'h_mar_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_mardi_matin', true ),
+					'h_mar_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_mardi_amidi', true ),
+					'h_mer_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_mercredi_matin', true ),
+					'h_mer_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_mercredi_amidi', true ),
+					'h_jeu_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_jeudi_matin', true ),
+					'h_jeu_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_jeudi_amidi', true ),
+					'h_ven_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_vendredi_matin', true ),
+					'h_ven_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_vendredi_amidi', true ),
+					'h_sam_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_samedi_matin', true ),
+					'h_sam_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_samedi_amidi', true ),
+					'h_dim_ma'						=>	get_post_meta( $post_active_tax->ID, '_commercant_dimanche_matin', true ),
+					'h_dim_am'						=>	get_post_meta( $post_active_tax->ID, '_commercant_dimanche_amidi', true ),
+					'accepte_paiement'			=>	get_post_meta( $post_active_tax->ID, '_commercant_accepte_paiement', false ),
+					'terms'								=>   wp_get_post_terms( $post_active_tax->ID, 'cat_commercant'),
+					'tags'								=>	get_the_tags($post_active_tax->ID),
+					'thumb'							=>	get_the_post_thumbnail( $post_active_tax->ID, 'thumbnail')
+				);
+				
+				
+			 }
+			 
+			 return $return;
+			 
+		}
+			
+	}
+	
+	
 	
 	
 	/**
@@ -353,6 +433,33 @@ class commercant_Display extends commercant {
 }
 
 
+
+	/**
+	 * getCommercantsInfos()
+	 *
+	 * Mise en forme des informations des commercants de la taxonomy active
+	 *
+	 * @uses return_commercant_variables()
+	 * @return string $return
+	**/
+		
+	public function Maps_Commercant_by_Taxonomy($part=null,$tax_id,$title=false) {
+
+		$commercants_items = commercant_Display::return_all_commercants_variables($tax_id);	
+		$return = "";
+
+		// Localisation
+		if ($part=="localisation") {
+			$return = "";
+			if ($title != false) {$return .= "<h3>" . __('Localisation','commercant') . " : </h3>";}
+			$return .= "<div class='commercant-by-taxonomy-map' id='commercant-by-taxonomy-map" . get_queried_object()->term_id . "' data-commercant='" . json_encode($commercants_items) . "' ></div>";
+			return($return);
+			
+		}
+		
+	}
+		
+		
 
 	/**
 	 * insertCommercantInfos()
