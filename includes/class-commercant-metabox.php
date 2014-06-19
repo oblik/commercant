@@ -301,8 +301,7 @@ class commercant_Metabox {
 					'options' => array(
 						'check1' => 'Cheque cadeau',
 						'check2' => 'Carte privilege',
-						'check3' => 'Ticket restaurant',
-						'check4' => 'Carte bleue',
+						'check3' => 'Ticket restaurant'
 					)
 				),
 				array(
