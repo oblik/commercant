@@ -1,16 +1,16 @@
 <?php
 /*
- * Plugin Name: commercant
+ * Plugin Name: Commercants
  * Version: 1.0
- * Plugin URI: http://www.ch1.fr/
- * Description: 
- * Author: Hugh Lashbrooke
- * Author URI: http://www.ch1.fr/
+ * Plugin URI: 
+ * Description: Plugin pour la gestion d'une liste de commercants.
+ * Author: Sylvain
+ * Author URI: 
  * Requires at least: 3.8
  * Tested up to: 3.8.1
  *
  * @package WordPress
- * @author Hugh Lashbrooke
+ * @author Sylvain
  * @since 1.0.0
  */
 

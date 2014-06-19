@@ -7,12 +7,15 @@ class commercant_Post_Type extends commercant {
 	public function __construct () {
 	
 		parent::__construct();
-	
+		
 		// Regsiter post type
 		add_action( 'init' , array( $this, 'register_post_type' ) );
 
 		// Register taxonomy
 		add_action('init', array( $this, 'register_taxonomy' ) );
+		
+		// Flush rewrite
+		add_action('init', array( $this, 'commercant_flush_rewrite_rules' ) );
 		
 		// Add post type tags to archive page
 		add_action( 'pre_get_posts',array( $this, 'add_tags_post_type_archive' )  );
@@ -40,6 +43,8 @@ class commercant_Post_Type extends commercant {
 		}
 
 	}
+	
+
 
 	/**
 	 * Register new post type
@@ -85,7 +90,7 @@ class commercant_Post_Type extends commercant {
 		
 		register_post_type( $this->_token, $args );
 		
-		// flush_rewrite_rules();
+		
 	}
 
 	/**
@@ -118,13 +123,29 @@ class commercant_Post_Type extends commercant {
         register_taxonomy( 'cat_commercant' , $this->_token , $args );
     }
 	
-
+	
+	
+	
+	/**
+	 * flush_rewrite_rules
+	*/
+	 
+	 public function commercant_flush_rewrite_rules () {
+	 
+		if ( get_option('commercant_flush_rewrite') == false ) {
+			flush_rewrite_rules();
+			update_option('commercant_flush_rewrite', true);
+		}
+	
+	}
+	
 
     /**
      * Regsiter column headings for post type
      * @param  array $defaults Default columns
      * @return array           Modified columns
      */
+	 
     public function register_custom_column_headings ( $defaults ) {
 		$new_columns = array(
 			'custom-field' => __( 'Custom Field' , 'commercant' )

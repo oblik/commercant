@@ -107,6 +107,9 @@ class commercant {
 		// Handle localisation
 		$this->load_plugin_textdomain();
 		add_action( 'init', array( $this, 'load_localisation' ), 0 );
+		
+		// Flush rewrite
+		add_action('admin_init', array( $this,'commercant_settings_flush_rewrite'),0);
 	}
 
 	/**
@@ -254,6 +257,7 @@ class commercant {
 	 */
 	public function install () {
 		$this->_log_version_number();
+		flush_rewrite_rules();
 	} // End install()
 
 	/**
@@ -264,6 +268,18 @@ class commercant {
 	 */
 	private function _log_version_number () {
 		update_option( $this->_token . '_version', $this->_version );
+	}
+	
+	/**
+	 * Flush rewrite option
+	 * @access  public
+	 * @since   1.0.0
+	 * @return  void
+	 */
+	public function commercant_settings_flush_rewrite() {
+		if(!get_option('commercant_flush_rewrite')){
+			add_option('commercant_flush_rewrite', false);
+		}
 	}
 
 }
