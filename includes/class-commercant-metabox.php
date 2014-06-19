@@ -139,6 +139,12 @@ class commercant_Metabox {
 					'type' => 'text_url',
 				),
 				array(
+					'name' => 'Twitter',
+					'desc' => 'Page Twitter du commer&ccedil;ant. Exemple : www.twitter.com/commercant ',
+					'id'   => $prefix . 'twitter',
+					'type' => 'text_url',
+				),
+				array(
 					'name' => 'Situation du commer&ccedil;ant',
 					'id'   => $prefix . 'titresection2',
 					'type' => 'title',
@@ -300,8 +306,7 @@ class commercant_Metabox {
 					'type' => 'multicheck',
 					'options' => array(
 						'check1' => 'Cheque cadeau',
-						'check2' => 'Carte privilege',
-						'check3' => 'Ticket restaurant'
+						'check2' => 'Carte passerelle'
 					)
 				),
 				array(

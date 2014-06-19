@@ -148,7 +148,9 @@ class commercant_Post_Type extends commercant {
 	 
     public function register_custom_column_headings ( $defaults ) {
 		$new_columns = array(
-			'custom-field' => __( 'Custom Field' , 'commercant' )
+			'Thumb' => __( 'Photo' , 'commercant' ),
+			'rue' => __( 'Rue' , 'commercant' ),
+			'terms' => __('Categories', 'commercant')
 		);
 
 		$last_item = '';
@@ -194,11 +196,27 @@ class commercant_Post_Type extends commercant {
 
 		switch ( $column_name ) {
 
-			case 'custom-field':
-				$data = get_post_meta( $id, '_custom_field', true );
+			case 'Thumb':
+				echo get_the_post_thumbnail( $id, 'thumbnail');
+			break;
+			
+			case 'rue':
+				$data = get_post_meta( $id, '_commercant_rue', true );
 				echo $data;
 			break;
-
+			
+			case 'terms':
+				$terms = wp_get_post_terms( $id, 'cat_commercant'); 
+				$separator = ', ';
+				$output = '';
+				if($terms){
+					foreach($terms as $term) {
+						$output .= $term->name .$separator;
+					}
+				echo trim($output, $separator);
+				}
+			break;
+			
 			default:
 			break;
 		}
